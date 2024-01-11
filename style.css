@@ -1,0 +1,72 @@
+/* Apply box-sizing to all elements for more predictable layout */
+* {
+    box-sizing: border-box;
+}
+
+/* Set basic styling for the body, including font, centering, and overflow handling*/
+body {
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden; /* This makes what is outside our viewport hidden so in more sense it hides what is outside our viewport so in more sense it chooses whether to clip content or add content of an element is too big to fit in specified area*/
+    margin: 0;
+}
+
+/* Define styles for the main container holding the expanding panels */
+.container {
+    display: flex;
+    /* Flex-direction set to row (default), making it a horizontal container */
+    /* Flex-direction: column; would make it a vertical container */
+    width: 90vw;  /* Takes up 90% of the viewport width */
+    
+}
+
+/* Define styles for each panel within the container */
+.panel {
+    background-size: auto 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 80vh;
+    border-radius: 50px;
+    color: #fff;
+    flex: 0.5;   /* Initial size; adjusts when panel is active */
+    margin: 10px;  /* Adds a 10-pixel margin to each panel */
+    position: relative; /* Allows positioning of child elements */
+    transition: flex 0.7s ease-in; /* Transition for the flex property */
+}
+
+/* Style for the h3 element inside each panel */
+.panel h3 {
+    font-size: 24px;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    margin: 0;
+    opacity: 0; /* Initially invisible; becomes visible when panel is active */
+}
+
+/* Style for an active panel, adjusting its size */
+.panel.active {
+    flex: 5;
+    
+}
+
+/* Style for the h3 element when the panel is active */
+.panel.active h3 {
+    opacity: 1;
+    transition: opacity 0.3s ease-in 0.4s; /* Transition for the opacity property */
+}
+
+/* Media query for small screens, adjusting container width and hiding specific panels */
+@media(max-width: 480px) {
+    .container {
+        width: 100vw; /* Takes up 100% of the viewport width on small screens */
+    }
+
+    /* Hide the 4th and 5th panels on small screens */
+    .panel:nth-of-type(4), .panel:nth-of-type(5) {
+        display: none;
+    }
+}
